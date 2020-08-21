@@ -1,5 +1,4 @@
 require 'musician'
-require 'pry-byebug'
 
 describe 'Musician' do
   let(:musician) { Musician.new(
@@ -49,7 +48,7 @@ describe 'Musician' do
   it "should know to sing if cannot play any instruments" do
     expect(musician).to respond_to :instruments
     expect(musician.instruments).to be_a Array
-    expect(musician.instruments).to eq ['Sing']
+    expect(musician.instruments).to eq ['sing']
   end
 
   it "should be sober at the start of their career" do
@@ -68,6 +67,7 @@ describe 'Musician' do
     expect(guitarist).to respond_to :play
     expect(guitarist.play('guitar')).to be_a String
     expect(guitarist.play('guitar')).to eq "Playing the guitar"
+    expect(guitarist.play('sing')).to eq "Singing Rock and Roll 🤘"
   end
 
   it "should not try to play instrument s/he can't play" do
@@ -88,3 +88,4 @@ describe 'Musician' do
     expect(old_musician.alive?).to eq false
   end
 end
+

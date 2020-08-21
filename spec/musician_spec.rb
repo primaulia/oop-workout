@@ -3,6 +3,11 @@ require 'musician'
 describe 'Musician' do
   let(:musician) { Musician.new }
   let(:guitarist) { Musician.new(instruments: ['guitar']) }
+  let(:old_musician) { Musician.new(
+      instruments: ['guitar'],
+      age: 40
+    ) 
+  }
 
   it "Musican constructor (initialize method) should take 1 parameters" do
     initialize_parameters_count = Musician.allocate.method(:initialize).arity
@@ -52,9 +57,21 @@ describe 'Musician' do
     expect(guitarist.play('guitar')).to eq "Playing the guitar"
   end
 
-  it "should not try to play instrument she can't play" do
+  it "should not try to play instrument s/he can't play" do
     expect(guitarist).to respond_to :play
-    expect(guitarist.play('flue')).to be_a String
-    expect(guitarist.play('flue')).to eq "I can't play a flute"
+    expect(guitarist.play('flute')).to be_a String
+    expect(guitarist.play('flute')).to eq "I can't play a flute"
+  end
+
+  it "should be able to take drugs and get high" do
+    expect(musician).to respond_to :take_drugs!
+    musician.take_drugs!
+    expect(musician.high?).to eq true
+  end
+
+  it "should overdose if take drugs when s/he is older than 27 years old" do
+    expect(old_musician).to respond_to :take_drugs!
+    old_musician.take_drugs!
+    expect(old_musician.alive?).to eq false
   end
 end

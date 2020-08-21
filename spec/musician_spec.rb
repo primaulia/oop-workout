@@ -1,7 +1,14 @@
 require 'musician'
+require 'pry-byebug'
 
 describe 'Musician' do
-  let(:musician) { Musician.new }
+  let(:musician) { Musician.new(
+      name: 'Yung Rok',
+      genre: 'Rock',
+      gender: 'male',
+      age: 25
+    ) 
+  }
   let(:guitarist) { Musician.new(instruments: ['guitar']) }
   let(:old_musician) { Musician.new(
       instruments: ['guitar'],
@@ -11,7 +18,7 @@ describe 'Musician' do
 
   it "Musican constructor (initialize method) should take 1 parameters" do
     initialize_parameters_count = Musician.allocate.method(:initialize).arity
-    expect(initialize_parameters_count).to eq 1
+    expect(initialize_parameters_count).to eq -1
   end
 
   it "should have an name" do
@@ -39,15 +46,21 @@ describe 'Musician' do
     expect(musician.instruments).to be_a Array
   end
 
+  it "should know to sing if cannot play any instruments" do
+    expect(musician).to respond_to :instruments
+    expect(musician.instruments).to be_a Array
+    expect(musician.instruments).to eq ['Sing']
+  end
+
   it "should be sober at the start of their career" do
     expect(musician).to respond_to :high?
-    expect(musician.high?).to be_a Boolean
+    expect(musician.high?).to be_a FalseClass
     expect(musician.high?).to eq false
   end
 
   it "should be alive at the start of their career" do
     expect(musician).to respond_to :alive?
-    expect(musician.alive?).to be_a Boolean
+    expect(musician.alive?).to be_a TrueClass
     expect(musician.alive?).to eq true
   end
 

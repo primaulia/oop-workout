@@ -1,0 +1,3 @@
+class Musician
+  
+end
